@@ -99,7 +99,12 @@ public class Robot extends TimedRobot {
     TimerSub.reset();
     TimerSub.start();
 
-    // AutoSub.scoreL1Auto(DriveSub, ShooterSub);
+    //////////////////////////////////////// pls keep
+    DriveSub.zeroMotor();
+    //////////////////////////////////////////////
+
+
+    AutoSub.scoreL1Auto(DriveSub, ShooterSub);
 
     // A_Selected = Auto_Selector.getSelected();
     System.out.println("Auto Selected: " + A_Selected);
@@ -118,7 +123,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic(){
     SmartDashboard.putNumber("Timer", TimerSub.get());
-    AutoSub.scoreL1Auto(DriveSub, ShooterSub);
+    // AutoSub.scoreL1Auto(DriveSub, ShooterSub);
 
     // RunAuto();
     // double time = Timer.getFPGATimestamp();
@@ -133,8 +138,17 @@ public class Robot extends TimedRobot {
   public void teleopInit(){
     // AutoFinished = true;
     SmartDashboard.putString("Auto Command", "AutoReset");
+
+
+
+
+    /////////////////////////////////pls keep
+    DriveSub.zeroMotor();
+
+
+    //////////////////////////////
     stopAll();
-  
+   
   }
 
   // public void macro(){ // D Pad up L2

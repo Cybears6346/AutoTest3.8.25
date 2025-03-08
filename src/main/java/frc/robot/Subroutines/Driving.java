@@ -86,6 +86,12 @@ public class Driving {
         }
     }
 
+///////////////////////////////////////////////////////////// Pls dont change 
+    public void zeroMotor(){
+        d_Encoder_Left.setPosition(0);
+    }
+
+//////////////////////////////////////////////////////////////////////////////////
     public double getEncoder(){
         return d_Encoder_Left.getPosition(); // Presumably returns value in motor rotations
     }
