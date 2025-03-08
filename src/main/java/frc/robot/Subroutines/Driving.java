@@ -48,6 +48,7 @@ public class Driving {
 
     public void Initial (){
         SparkConfigure.Drive_Initialize(m_frontLeft, m_frontRight, m_rearLeft, m_rearRight);
+        resetEncoders();
     }
 
     public void Group()
@@ -92,7 +93,11 @@ public class Driving {
 
     public double getEncoderToInches() // Note, 1:27 ratio and 1.45 working circumference 
     {
-        return (d_Encoder_Left.getPosition() / 8.46 * 18.8495559215) - 560; // 8.46 is the gear ratio, 18.8 is the circumference, Should theoretically return displacement from position on starting
+        return (d_Encoder_Left.getPosition() / 8.46 * 18.8495559215); // 8.46 is the gear ratio, 18.8 is the circumference, Should theoretically return displacement from position on starting
+    }
+
+    public void resetEncoders(){
+        d_Encoder_Left.setPosition(0);
     }
 
 }

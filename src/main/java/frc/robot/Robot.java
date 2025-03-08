@@ -99,8 +99,6 @@ public class Robot extends TimedRobot {
     TimerSub.reset();
     TimerSub.start();
 
-    // AutoSub.scoreL1Auto(DriveSub, ShooterSub);
-
     // A_Selected = Auto_Selector.getSelected();
     System.out.println("Auto Selected: " + A_Selected);
 
@@ -118,8 +116,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic(){
     SmartDashboard.putNumber("Timer", TimerSub.get());
-    AutoSub.scoreL1Auto(DriveSub, ShooterSub);
-
+    // AutoSub.scoreL1Auto(DriveSub, ShooterSub);
+    AutoSub.scoreL1Auto(DriveSub, ShooterSub, TimerSub);
+    
     // RunAuto();
     // double time = Timer.getFPGATimestamp();
     // if (time - startTime > 0 && time - startTime < 1)
@@ -344,7 +343,7 @@ double targetHeight = 6.875;
             break;
 
           case A_scoreL1:
-            AutoSub.scoreL1Auto(DriveSub, ShooterSub);
+            AutoSub.scoreL1Auto(DriveSub, ShooterSub, TimerSub);
           SmartDashboard.putString("Auto Command", "Auto Finished");;
 
           default:
