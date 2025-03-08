@@ -49,10 +49,9 @@ public class Autonomous {
     }
 
     //This Auton works but isn't based on any encoder values or something similar
-    public void scoreL1Auto(Driving DriveSub, Shooter ShooterSub, Timer TimerSub)
+    public void scoreL1Auto(Driving DriveSub, Shooter ShooterSub)
     {
-        double time = TimerSub.getFPGATimestamp();
-        while (DriveSub.getEncoderToInches() < startingToReefCenter && time < 15) // Assumes 2 inches of movement is necessary to leave starting position/area
+        while (DriveSub.getEncoderToInches() < startingToReefCenter) // Assumes 2 inches of movement is necessary to leave starting position/area
         {
             DriveSub.AutoDrive(-0.5, 0);
             DriveSub.returnDrive().feed();
