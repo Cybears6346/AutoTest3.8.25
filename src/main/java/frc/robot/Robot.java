@@ -113,12 +113,26 @@ public class Robot extends TimedRobot {
 
   }
 
+  double startingToReefCenter = 88 - 30 - 2.9 + 0.9;
+
   @Override
   public void autonomousPeriodic(){
+     // TimerSub.getFPGATimestamp();
+
+      double time = Timer.getFPGATimestamp();
+      
     SmartDashboard.putNumber("Timer", TimerSub.get());
-    // AutoSub.scoreL1Auto(DriveSub, ShooterSub);
-    AutoSub.scoreL1Auto(DriveSub, ShooterSub, TimerSub);
-    
+    while (DriveSub.getEncoderToInches() < startingToReefCenter && time < 15) // Assumes 2 inches of movement is necessary to leave starting position/area
+    {
+        DriveSub.AutoDrive(-0.5, 0);
+        DriveSub.returnDrive().feed();
+        System.out.println("Linear displacement: " + DriveSub.getEncoderToInches());
+        // DriveSub.returnDrive().feed();
+    }
+    while (ShooterSub.getEncoderToInches() < 0.5 && time < 15)
+    {
+        ShooterSub.SetSpeed(-0.5);
+    }    
     // RunAuto();
     // double time = Timer.getFPGATimestamp();
     // if (time - startTime > 0 && time - startTime < 1)
@@ -329,28 +343,28 @@ double targetHeight = 6.875;
     // }
     
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  public void RunAuto(){
-    if (AutoFinished == false){
-        switch (A_Selected) {
-          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          case A_Do_Nothing:
-            AutoSub.doNothingAuto(DriveSub);
+  // public void RunAuto(){
+  //   if (AutoFinished == false){
+  //       switch (A_Selected) {
+  //         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //         case A_Do_Nothing:
+  //           AutoSub.doNothingAuto(DriveSub);
           
-            break;
+  //           break;
 
-          case A_LeaveStartingPosition:
-            AutoSub.leaveStartingPositionAuto(DriveSub);
-            break;
+  //         case A_LeaveStartingPosition:
+  //           AutoSub.leaveStartingPositionAuto(DriveSub);
+  //           break;
 
-          case A_scoreL1:
-            AutoSub.scoreL1Auto(DriveSub, ShooterSub, TimerSub);
-          SmartDashboard.putString("Auto Command", "Auto Finished");;
+  //         case A_scoreL1:
+  //           AutoSub.scoreL1Auto(DriveSub, ShooterSub, time);
+  //         SmartDashboard.putString("Auto Command", "Auto Finished");;
 
-          default:
-          break;
-        }
-    }
-  }
+  //         default:
+  //         break;
+  //       }
+  //   }
+  // }
 
   // public void getSelected1(){
   //   A_Selected = Auto_Selector.getSelected();
